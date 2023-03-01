@@ -1,43 +1,16 @@
-<div [ngClass]="{header: true}">
+<header>
     <h1 *ngIf="title">{{ title | uppercase }}</h1>
-</div>
+</header>
 
-<div [ngClass]="{content:true}">
-    <div [ngClass] = "{projectSection:true}">
-        <div
-            *ngFor="let project of projects | projectFilter : selectedTagFilter"
-            [ngClass]="{
-                projectCard: true,
-                hidden: ((project.category?.name !== selectedCategoryFilter) && (selectedCategoryFilter !== undefined))
-            }"
-        >
-            <div [ngClass]="{projectTitle: true}">
-                {{project.title | uppercase}}
-            </div>
-            <div [ngClass]="{projectBody: true}">
-                {{project.excerpt}}
-            </div>
-            <div
-                *ngIf="project.category"
-                [ngClass]="{projectCategory: true}"
-                (click)="handleCategoryFilter(project.category.name)">
-                 Category: {{project.category.name}}
-            </div>
-            <div
-                *ngIf="project.tags!.length > 0"
-                [ngClass]="{projectTags: true}">
-                Tags: 
-                <ng-container 
-                *ngFor = "let tag of project.tags">
-                <div 
-                [ngClass]="{projectTagNames:true}"
-                (click)="handleTagFilter(tag.name)">
-                    {{tag.name}}
-                </div>
-                </ng-container>
-            </div>
-        </div>
-    </div>
+<main [ngClass]="{content:true}">
+    <app-projects
+     [selectedCategoryFilter] = "selectedCategoryFilter"
+     (newCategoryFilterEvent) = "handleCategoryFilter($event)"
+     [selectedTagFilter] = "selectedTagFilter"
+     (newTagFilterEvent) = "handleTagFilter($event)"
+     class = "projectSection"
+     ></app-projects>
+
     <div [ngClass]="{filterSection:true}">
         <div
           *ngIf="selectedCategoryFilter || selectedTagFilter"
@@ -59,24 +32,20 @@
                </svg>  
         </div>
         </div>
-        <h2>Catagories</h2>
-        <div 
-            *ngFor="let category of categories"
-            [ngClass]="{categoriesSection:true}"
-            (click)="handleCategoryFilter(category.name)">
-            {{category.name}}
-        </div>
+        <h2>Categories</h2>
+        <app-categories
+        [selectedCategoryFilter] = "selectedCategoryFilter"
+        (newCategoryFilterEvent) = "handleCategoryFilter($event)"
+        ></app-categories>
         <h2>Tags</h2>
-        <div 
-            *ngFor="let tag of tags"
-            [ngClass]="{tagsSection:true}"
-            (click)="handleTagFilter(tag.name)">
-            {{tag.name}}
-        </div>
+        <app-tags
+        [selectedTagFilter] = "selectedTagFilter"
+        (newTagFilterEvent) = "handleTagFilter($event)"
+        ></app-tags>
     </div>
-</div>
+</main>
 <footer>
-    © {{date}} Kevin Chong
+    © {{date}} {{author}}
   </footer>
 
 

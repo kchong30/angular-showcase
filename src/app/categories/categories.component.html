@@ -1,0 +1,8 @@
+<div 
+*ngFor="let category of categories"
+[ngClass]="{categoriesSection:true,
+            selected: (category.name == selectedCategoryFilter)
+}"
+(click)="handleCategoryFilter(category.name)">
+{{category.name}}
+</div>

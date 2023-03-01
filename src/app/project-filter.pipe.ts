@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Project, Tag } from './app.component';
+import { Project } from './model/project';
+
 
 @Pipe({
   name: 'projectFilter',

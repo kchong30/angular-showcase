@@ -1,0 +1,8 @@
+<div 
+*ngFor="let tag of tags"
+[ngClass]="{tagsSection:true,
+           selected: (tag.name == selectedTagFilter)
+}"
+(click)="handleTagFilter(tag.name)">
+{{tag.name}}
+</div>
