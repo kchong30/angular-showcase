@@ -93,7 +93,20 @@ const PROJECTS: Project[] = [
     "created_at": "2023-02-23T22:31:23.000000Z",
     "updated_at": "2023-02-23T22:31:23.000000Z",
     "category": { "id": 1, "slug": "back-end", "name": "Back End" },
-    "tags": []
+    "tags": [
+      {
+        "id": 1,
+        "name": "Laravel",
+        "slug": "laravel",
+        "pivot": { "projects_id": 1, "tags_id": 1 }
+      },
+      {
+        "id": 2,
+        "name": "PHP",
+        "slug": "php",
+        "pivot": { "projects_id": 1, "tags_id": 2 }
+      },
+    ]
   },
   {
     "id": 3,
@@ -125,7 +138,14 @@ const PROJECTS: Project[] = [
     "created_at": "2023-02-23T22:31:23.000000Z",
     "updated_at": "2023-02-23T22:31:23.000000Z",
     "category": { "id": 2, "slug": "front-end", "name": "Front End" },
-    "tags": []
+    "tags": [
+      {
+        "id": 1,
+        "name": "PHP",
+        "slug": "php",
+        "pivot": { "projects_id": 1, "tags_id": 2 }
+      }
+    ]
   },
   {
     "id": 5,
@@ -202,6 +222,8 @@ const PROJECTS: Project[] = [
 
 export class AppComponent {
   title = 'Kevin Chong - Show Me What you Got';
+  date: number = new Date().getFullYear();
+
   public projects = PROJECTS;
   public tags = TAGS;
   public categories = CATEGORIES;
