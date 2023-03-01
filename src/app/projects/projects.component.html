@@ -1,0 +1,35 @@
+<div [ngClass] = "{projectSection:true}">
+    <div
+        *ngFor="let project of projects | projectFilter : selectedTagFilter"
+        [ngClass]="{
+            projectCard: true,
+            hidden: ((project.category?.name !== selectedCategoryFilter) && (selectedCategoryFilter !== undefined))
+        }"
+    >
+        <div [ngClass]="{projectTitle: true}">
+            {{project.title | uppercase}}
+        </div>
+        <div [ngClass]="{projectBody: true}">
+            {{project.excerpt}}
+        </div>
+        <div
+            *ngIf="project.category"
+            [ngClass]="{projectCategory: true}"
+            (click)="handleCategoryFilter(project.category.name)">
+             Category: {{project.category.name}}
+        </div>
+        <div
+            *ngIf="project.tags!.length > 0"
+            [ngClass]="{projectTags: true}">
+            Tags: 
+            <ng-container 
+            *ngFor = "let tag of project.tags">
+            <div 
+            [ngClass]="{projectTagNames:true}"
+            (click)="handleTagFilter(tag.name)">
+                {{tag.name}}
+            </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
